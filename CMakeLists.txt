@@ -3,4 +3,4 @@ project(sqlite_clone)
 
 include_directories(./src)
 
-add_executable(binary ./src/main.cpp ./src/repl.cpp)
+add_executable(binary ./src/main.cpp ./src/repl.cpp ./src/table.cpp)

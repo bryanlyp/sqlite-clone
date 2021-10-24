@@ -1,6 +1,5 @@
 #include "repl.h"
 
-
 Repl::Repl() {
     this->input_buffer = "";
     this->output_buffer = "";
@@ -19,11 +18,10 @@ void Repl::execute() {
         if (this->input_buffer[0] == '.') {
             this->do_meta_command();
         } else {
-            this->prepare_statement();
+            this->parse_command();
         }
     } catch (const UnrecognizedCommandException &exception) {
         std::cerr << exception.what() << std::endl;
-
     }
 }
 void Repl::do_meta_command() {
@@ -33,11 +31,27 @@ void Repl::do_meta_command() {
         throw UnrecognizedCommandException("Unrecognized meta command \"" + this->input_buffer + "\"");
     }
 }
-void Repl::prepare_statement() {
-    if (this->input_buffer.find("select ") == 0) {
-        std::cout << "TODO: implemenet select command" << std::endl;
-    } else if (this->input_buffer.find("insert ") == 0) {
-        std::cout << "TODO: implement insert command" << std::endl;
+
+void Repl::parse_command() {
+    std::stringstream ss(this->input_buffer);
+    std::string cmd;
+    ss >> cmd;
+    if (cmd == "select") {
+        std::string next;
+        ss >> next;
+        if (next == "*") {
+            table.print_all();
+        }
+        std::cout<<"TODO: implement select command" <<std::endl;
+    } else if (cmd == "insert") {
+        std::string args = this->input_buffer.substr(7);
+        this->table.insert(args);
+    } else if (cmd == "create") {
+        std::string table_name;
+        ss >> table_name;
+        //assert table_name == "table";
+        ss >> table_name;
+        this->table = Table(table_name, "int varchar(32) varchar(256)");
     } else {
         throw UnrecognizedCommandException("Unrecognized command \"" + this->input_buffer + "\"");
     }

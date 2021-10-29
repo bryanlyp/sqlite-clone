@@ -32,26 +32,24 @@ void Repl::do_meta_command() {
     }
 }
 
+std::vector<std::string> Repl::tokenize(const std::string str) {
+    std::stringstream ss(str);
+    std::string token;
+    std::vector<std::string> tokens;
+    while (ss >> token) {
+        tokens.push_back(token);
+    }
+    return tokens;
+}
+
 void Repl::parse_command() {
-    std::stringstream ss(this->input_buffer);
-    std::string cmd;
-    ss >> cmd;
-    if (cmd == "select") {
-        std::string next;
-        ss >> next;
-        if (next == "*") {
-            table.print_all();
-        }
-        std::cout<<"TODO: implement select command" <<std::endl;
-    } else if (cmd == "insert") {
-        std::string args = this->input_buffer.substr(7);
+    std::vector<std::string> args = tokenize(this->input_buffer);
+    if (args[0] == "select") {
+        this->output_buffer = table.select(args);
+    } else if (args[0] == "insert") {
         this->table.insert(args);
-    } else if (cmd == "create") {
-        std::string table_name;
-        ss >> table_name;
-        //assert table_name == "table";
-        ss >> table_name;
-        this->table = Table(table_name, "int varchar(32) varchar(256)");
+    } else if (args[0] == "create") {
+        this->table = Table(args[2], tokenize("int varchar(32) varchar(256)"));
     } else {
         throw UnrecognizedCommandException("Unrecognized command \"" + this->input_buffer + "\"");
     }
@@ -65,6 +63,7 @@ void Repl::print_output() {
     std::cout << this->output_buffer << std::endl;
     this->output_buffer = "";
 }
+
 void Repl::init() {
     while (this->is_expecting_new_input) {
         this->print_prompt();

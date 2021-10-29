@@ -6,6 +6,8 @@
 #include <sstream>
 #include <cassert>
 #include "table.h"
+#include <vector>
+
 
 class Repl {
     private:
@@ -13,7 +15,8 @@ class Repl {
         std::string output_buffer;
         bool is_expecting_new_input;
         Table table;
-
+        
+        std::vector<std::string> tokenize(const std::string str);       
         void print_prompt();
         void read_input();
         void execute();
@@ -21,7 +24,7 @@ class Repl {
         void print_output();
         void do_meta_command();
         void parse_command();
-        char* serialize_input();
+        //char* serialize_input();
     public:
         Repl();
         void init();

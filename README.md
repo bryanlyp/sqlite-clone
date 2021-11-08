@@ -13,7 +13,7 @@ It also supports 2 data types:
 - int
 - varchar (of user-specified length)
 
-This project takes reference from [this tutorial](https://cstack.github.io/db_tutorial/). However, it does endeavour to deviate slightly from the tutorial in the following ways (non-exhaustive):
+This project takes reference from [this tutorial](https://cstack.github.io/db_tutorial/). However, it does endeavour to deviate from the tutorial in the following ways (non-exhaustive):
 - The database is written in C++ rather than C.
 - This thus enables use of OOP principles to organize code instead of the functional programming approach used in the original project.
 - The database allows a custom schema to be entered as opposed to the original project. Note that a schema is currently hard-coded for ease of testing, but all downstream operations are designed with the objective of enabling the aforementioned functionality.
@@ -24,5 +24,5 @@ This project takes reference from [this tutorial](https://cstack.github.io/db_tu
 This project is currently incomplete. Specifically:
 - It performs all operations in memory. A Pager object to convert data to and from the disk is in the works to rectify this and enable some data permanence.
 - A B Tree is to be implemented.
-- A "sort" function is to be implemented.
+- A "sort" function is to be implemented (another deviation from the original tutorial).
 - Tidying up/refactoring of code is pending :)

@@ -17,7 +17,7 @@ This project takes reference from [this tutorial](https://cstack.github.io/db_tu
 - The database is written in C++ rather than C.
 - This thus enables use of OOP principles to organize code instead of the functional programming approach used in the original project.
 - The database allows a custom schema to be entered as opposed to the original project. Note that a schema is currently hard-coded for ease of testing, but all downstream operations are designed with the objective of enabling the aforementioned functionality.
-- The use of C++ also enables the use of the STL and therefore greater flexibility in terms of the auxiliiry data structures used.
+- The use of C++ also enables the use of the STL and therefore greater flexibility in terms of the auxiliary data structures used.
 - As much as possible, the C++ equivalents of the various C functions are used, although for lower-level operations such as those used in the Pager object (currently not pushed to main), a more C-style approach is taken as I find them to be more intuitive at that level.
 
 
